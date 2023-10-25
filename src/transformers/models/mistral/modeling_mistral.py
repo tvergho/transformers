@@ -1057,8 +1057,11 @@ class MistralModel(MistralPreTrainedModel):
         # add hidden states from the last decoder layer
         if output_hidden_states:
             all_hidden_states += (hidden_states,)
+            # print(len(all_hidden_states))
 
         next_cache = next_decoder_cache if use_cache else None
+        # print(f"Returning {len(all_hidden_states)}")
+        
         if not return_dict:
             return tuple(v for v in [hidden_states, next_cache, all_hidden_states, all_self_attns] if v is not None)
         return BaseModelOutputWithPast(
@@ -1156,7 +1159,7 @@ class MistralForCausalLM(MistralPreTrainedModel):
             inputs_embeds=inputs_embeds,
             use_cache=use_cache,
             output_attentions=output_attentions,
-            output_hidden_states=output_hidden_states,
+            output_hidden_states=output_hidden_states or early_exit_layers is not None,
             return_dict=return_dict,
         )
         if early_exit_layers is not None:
