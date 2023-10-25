@@ -66,7 +66,7 @@ from .logits_process import (
     TypicalLogitsWarper,
 )
 from .stopping_criteria import (
-    LLamaQaStoppingCriteria,
+    # LLamaQaStoppingCriteria,
     MaxLengthCriteria,
     MaxTimeCriteria,
     StoppingCriteria,
